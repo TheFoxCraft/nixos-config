@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.trcc-linux.nixosModules.default
+    inputs.vicinae.nixosModules.default
   ];
 
   environment.systemPackages =
@@ -20,10 +21,11 @@
 
         mockoon
         insomnia
-        pgadmin4
+        pgadmin4-desktopmode
 
         nixfmt
         openssl
+        android-tools
       ]
 
       # communication
@@ -39,16 +41,33 @@
         modrinth-app
       ]
 
-      # tools
+      # tools/misc
       ++ [
         btop
         streamcontroller
         rustdesk
+        kdePackages.kdeconnect-kde
+        kdePackages.krdp
+        sunshine
+        openssh
+        fastfetch
+        scrcpy
+      ]
+
+      # hyprland
+      ++ [
+        kitty
+        vicinae
+        waybar
+        hyprpaper
+        rofi
       ]
 
       # office
       ++ [
         p3x-onenote
+        libreoffice
+        onlyoffice-desktopeditors
       ]
 
     );
@@ -70,4 +89,11 @@
       please = "sudo";
     };
   };
+
+  programs.xwayland.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-hyprland
+  ];
+
 }
