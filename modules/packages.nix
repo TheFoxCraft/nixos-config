@@ -2,7 +2,7 @@
 {
   imports = [
     inputs.trcc-linux.nixosModules.default
-    inputs.vicinae.nixosModules.default
+    inputs.silentSDDM.nixosModules.default
   ];
 
   environment.systemPackages =
@@ -24,6 +24,9 @@
         pgadmin4-desktopmode
 
         nixfmt
+        nil
+        nixd
+
         openssl
         android-tools
       ]
@@ -44,6 +47,7 @@
       # tools/misc
       ++ [
         btop
+        vulkan-tools
         streamcontroller
         rustdesk
         kdePackages.kdeconnect-kde
@@ -52,15 +56,37 @@
         openssh
         fastfetch
         scrcpy
+
+        grim
+        slurp
+        wl-clipboard
+
+        pavucontrol
+        playerctl
+      ]
+
+      # misc
+      ++ [
+        catppuccin-sddm
       ]
 
       # hyprland
       ++ [
         kitty
-        vicinae
         waybar
         hyprpaper
         rofi
+        nautilus
+        yazi
+
+        qt6Packages.qt6ct
+        libsForQt5.qt5ct
+        kdePackages.qtstyleplugin-kvantum
+      ]
+
+      # fonts
+      ++ [
+        nerd-fonts.jetbrains-mono
       ]
 
       # office
@@ -76,6 +102,38 @@
 
   programs.nix-ld.enable = true;
 
+  programs.silentSDDM = {
+    enable = true;
+    theme = "default";
+
+    profileIcons = {
+      tim = ../assets/profilePicture.png;
+    };
+
+    backgrounds = {
+      wallpaper = ../assets/wallpaper.png;
+    };
+
+    settings = {
+      General = {
+        scale = 1.25;
+      };
+
+      LockScreen = {
+        blur = 0;
+        background = "wallpaper.png";
+      };
+      "LockScreen.Message" = {
+        text = "tim-fischer.dev";
+      };
+
+      LoginScreen = {
+        blur = 20;
+        background = "wallpaper.png";
+      };
+    };
+  };
+
   programs.steam.enable = true;
 
   programs.trcc-linux.enable = true;
@@ -86,6 +144,8 @@
       ns = "sudo nixos-rebuild switch --flake ~/nixos-config#nixos";
       nb = "sudo nixos-rebuild boot --flake ~/nixos-config#nixos";
       nt = "sudo nixos-rebuild test --flake ~/nixos-config#nixos";
+      nv = "sudo nixos-rebuild build-vm --flake ~/nixos-config#nixos";
+      nvs = "nv & ./result/bin/run-nixos-vm";
       please = "sudo";
     };
   };

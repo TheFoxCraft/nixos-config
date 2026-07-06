@@ -1,0 +1,272 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(15, 18, 28, 0.55);
+  color: #d7e3ff;
+
+  border-bottom: 1px solid rgba(120, 170, 255, 0.25);
+
+  transition: background-color 250ms;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 4px 6px;
+}
+
+button {
+  box-shadow: none;
+  background: transparent;
+}
+
+button:hover {
+  background: transparent;
+}
+
+#window,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray,
+#power-profiles-daemon,
+#mpd,
+#custom-power {
+  background: rgba(35, 45, 70, 0.45);
+
+  margin: 4px 3px;
+  padding: 0 12px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(120, 170, 255, 0.1);
+
+  transition: all 180ms ease;
+}
+
+#window:hover,
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover,
+#power-profiles-daemon:hover,
+#mpd:hover,
+#custom-power:hover {
+  background: rgba(60, 85, 140, 0.45);
+  border-color: rgba(140, 190, 255, 0.35);
+}
+
+#workspaces {
+  margin: 4px;
+}
+
+#workspaces button {
+  color: #8ba3d9;
+
+  margin: 3px;
+  padding: 0 11px;
+
+  border-radius: 10px;
+
+  transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+  color: white;
+
+  background: rgba(80, 120, 220, 0.25);
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: white;
+
+  background: rgba(90, 140, 255, 0.4);
+
+  border: 1px solid rgba(140, 190, 255, 0.35);
+}
+
+#workspaces button.urgent {
+  background: rgba(255, 70, 70, 0.25);
+  color: #ffb5b5;
+}
+
+#window {
+  color: #d8e5ff;
+}
+
+#clock {
+  color: #9fd4ff;
+}
+
+#cpu {
+  color: #8bd5ff;
+}
+
+#memory {
+  color: #b7b8ff;
+}
+
+#temperature {
+  color: #ffcf8b;
+}
+
+#temperature.critical {
+  color: #ff7777;
+  background: rgba(255, 50, 50, 0.18);
+}
+
+#network {
+  color: #8bc6ff;
+}
+
+#network.disconnected {
+  background: rgba(255, 60, 60, 0.18);
+  color: #ff8888;
+}
+
+#pulseaudio {
+  color: #ffd98d;
+}
+
+#pulseaudio.muted {
+  color: #8b98aa;
+}
+
+#tray {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  background: rgba(255, 60, 60, 0.18);
+
+  border-radius: 8px;
+}
+
+#mpd {
+  color: #98f0d0;
+}
+
+#mpd.disconnected {
+  color: #ff8888;
+}
+
+#mpd.paused {
+  color: #ffd26a;
+}
+
+#mpd.stopped {
+  color: #9ea8b6;
+}
+
+/* -------- Power Profile ---------- */
+
+#power-profiles-daemon {
+  font-weight: bold;
+}
+
+#power-profiles-daemon.performance {
+  color: #ff6d6d;
+
+  background: rgba(255, 70, 70, 0.15);
+
+  border-color: rgba(255, 90, 90, 0.35);
+}
+
+#power-profiles-daemon.balanced {
+  color: #8bc6ff;
+
+  background: rgba(70, 130, 255, 0.15);
+
+  border-color: rgba(90, 160, 255, 0.35);
+}
+
+#power-profiles-daemon.power-saver {
+  color: #7ef2a3;
+
+  background: rgba(40, 180, 90, 0.15);
+
+  border-color: rgba(60, 220, 110, 0.35);
+}
+
+#custom-power {
+  color: #ff8b8b;
+
+  font-size: 16px;
+}
+
+#custom-power:hover {
+  background: rgba(255, 70, 70, 0.15);
+
+  border-color: rgba(255, 100, 100, 0.4);
+}
+
+tooltip {
+    background: rgba(20, 25, 40, 0.95);
+
+    border: 1px solid rgba(120, 170, 255, 0.25);
+    border-radius: 12px;
+
+    padding: 8px 12px;
+
+    color: #d7e3ff;
+
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+tooltip label {
+    color: #d7e3ff;
+}
+
+menu {
+    background: rgba(20, 25, 40, 0.96);
+
+    border: 1px solid rgba(120, 170, 255, 0.25);
+    border-radius: 14px;
+
+    padding: 6px;
+
+    color: #d7e3ff;
+
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+}
+
+menuitem {
+    padding: 8px 14px;
+    border-radius: 10px;
+
+    transition: background 150ms ease;
+}
+
+menuitem:hover {
+    background: rgba(90, 140, 255, 0.25);
+    color: white;
+}
+
+separator {
+    background: rgba(120, 170, 255, 0.2);
+    margin: 5px 8px;
+}

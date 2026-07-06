@@ -1,0 +1,100 @@
+* {
+    bg: #1e1e2e;
+    surface: #313244;
+    surface-hover: #45475a;
+    text: #cdd6f4;
+    text-muted: #a6adc8;
+    accent: #89b4fa;
+
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    width: 700px;
+    height: 500px;
+    background-color: @bg;
+    border: 2px;
+    border-color: #45475a;
+    border-radius: 16px;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 12px;
+}
+
+
+inputbar {
+    background-color: @surface;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 0px 0px 8px 0px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @accent;
+    padding-right: 10px;
+}
+
+case-indicator {
+    enabled: false;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @text;
+}
+
+
+listview {
+    background-color: @bg;
+    spacing: 5px;
+}
+
+
+element {
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 7px 10px;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 28px;
+    margin: 0px 12px 0px 0px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: @text;
+    vertical-align: 0.5;
+}
+
+
+element selected {
+    background-color: @accent;
+}
+
+element-text selected {
+    text-color: #1e1e2e;
+}
+
+element selected element-icon {
+    size: 30px;
+}
+
+
+textbox {
+    background-color: @bg;
+    text-color: @text;
+}
+
+
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar handle {
+    background-color: @accent;
+}
