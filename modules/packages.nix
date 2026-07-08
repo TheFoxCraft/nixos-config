@@ -29,6 +29,7 @@
 
         openssl
         android-tools
+        aapt
       ]
 
       # communication
@@ -64,6 +65,9 @@
 
         pavucontrol
         playerctl
+
+        zip
+        unzip
       ]
 
       # misc

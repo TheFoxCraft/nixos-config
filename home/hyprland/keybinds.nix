@@ -30,6 +30,9 @@ in
   (bind "SUPER + J" ''hl.dsp.layout("togglesplit")'')
   (bind "SUPER + SHIFT + S" ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy")'')
 
+  (bind "SUPER + R" ''hl.dsp.exec_cmd("android-rofi")'')
+  (bind "SUPER + SHIFT + R" ''hl.dsp.exec_cmd("kitty bash -lc 'android-rofi --refresh; exec bash'")'')
+
   # window focus
   (bind "SUPER + left" ''hl.dsp.focus({ direction = "left" })'')
   (bind "SUPER + right" ''hl.dsp.focus({ direction = "right" })'')

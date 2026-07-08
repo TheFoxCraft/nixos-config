@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+
+set -u
+
+# this is hardcoded because the device IP will stay the same. 
+# My PC is stationary at home and my mobile has this IP statically assigned.
+# the tcp/ip deamon will also always listen on this specific port, as long as i don't reboot my mobile
+DEVICE="192.168.2.196:5555"
+
+CACHE="$HOME/.cache/android-rofi"
+ICON_DIR="$CACHE/icons"
+NAME_DIR="$CACHE/names"
+
+mkdir -p "$ICON_DIR" "$NAME_DIR"
+
+REFRESH=false
+[[ "${1:-}" == "--refresh" ]] && REFRESH=true
+
+adb connect "$DEVICE" >/dev/null 2>&1
+
+get_packages() {
+    adb shell cmd package query-activities \
+        -a android.intent.action.MAIN \
+        -c android.intent.category.LAUNCHER |
+        grep "packageName=" |
+        sed -n 's/.*packageName=\([^ ]*\).*/\1/p' |
+        sort -u
+}
+
+refresh_package() {
+    local package="$1"
+
+    echo "Refreshing $package..." >&2
+
+    local apk
+    apk=$(
+        adb shell pm path "$package" |
+        grep base.apk |
+        sed 's/package://'
+    )
+
+    [[ -z "$apk" ]] && return
+
+    rm -f /tmp/android-rofi.apk
+
+    if ! adb pull "$apk" /tmp/android-rofi.apk >/dev/null 2>&1; then
+        echo "Failed pulling $package" >&2
+        return
+    fi
+
+    ####################################
+    # App Name
+    ####################################
+
+    local name
+
+    name=$(
+        aapt2 dump badging /tmp/android-rofi.apk |
+        sed -n "s/application-label:'\(.*\)'/\1/p" |
+        head -n1
+    )
+
+    [[ -z "$name" ]] && name="$package"
+
+    echo "$name" > "$NAME_DIR/$package"
+
+    #####################################
+    # Icon
+    ####################################
+
+    rm -f "$ICON_DIR/$package.png"
+    rm -f "$ICON_DIR/$package.xml"
+
+    # first try to find a real png
+    icon_path=$(
+        unzip -Z1 /tmp/android-rofi.apk |
+        grep -Ei '^res/.+\.(png|webp)$' |
+        grep -Ei '(launcher|app.?icon|ic_launcher)' |
+        sort -V |
+        tail -n1
+    )
+
+    # if not found, try to find any other mipmap icon
+    if [[ -z "$icon_path" ]]; then
+        icon_path=$(
+            unzip -Z1 /tmp/android-rofi.apk |
+            grep -Ei '^res/mipmap.*\.(png|webp)$' |
+            sort -V |
+            tail -n1
+        )
+    fi
+
+    # if still not found, try drawable
+    if [[ -z "$icon_path" ]]; then
+        icon_path=$(
+            unzip -Z1 /tmp/android-rofi.apk |
+            grep -Ei '^res/drawable.*\.(png|webp)$' |
+            grep -Ei '(launcher|app.?icon|ic_launcher)' |
+            sort -V |
+            tail -n1
+        )
+    fi
+
+    if [[ -n "$icon_path" ]]; then
+        unzip -p /tmp/android-rofi.apk "$icon_path" > "$ICON_DIR/$package.png" 2>/dev/null
+
+        if [[ ! -s "$ICON_DIR/$package.png" ]]; then
+            rm -f "$ICON_DIR/$package.png"
+        fi
+    fi
+}
+
+####################################
+# Refresh Mode
+####################################
+
+if $REFRESH; then
+    mapfile -t packages < <(get_packages)
+
+    for package in "${packages[@]}"; do
+        refresh_package "$package"
+    done
+
+    echo
+    echo "Cache refresh complete."
+    exit 0
+fi
+
+####################################
+# Normal Mode
+####################################
+
+apps=$(mktemp)
+
+{
+    echo "Main Screen||"
+
+    while read -r package; do
+
+        if [[ -f "$NAME_DIR/$package" ]]; then
+            name=$(<"$NAME_DIR/$package")
+        else
+            name="$package"
+        fi
+
+        if [[ -f "$ICON_DIR/$package.png" ]]; then
+            icon="$ICON_DIR/$package.png"
+        else
+            icon=""
+        fi
+
+        echo "$name|$package|$icon"
+
+    done < <(get_packages)
+
+} > "$apps"
+
+selection=$(
+while IFS="|" read -r name package icon; do
+    if [[ "$name" == "Main Screen" ]]; then
+        echo "$name"
+    else
+        if [[ -n "$icon" ]]; then
+            printf "%s\0icon\x1f%s\n" "$name" "$icon"
+        else
+            echo "$name"
+        fi
+    fi
+done < "$apps" | rofi -dmenu -i -show-icons -p "Android App"
+)
+
+[[ -z "$selection" ]] && exit 0
+
+package=$(grep "^${selection}|" "$apps" | cut -d'|' -f2)
+
+[[ -z "$package" ]] && exit 0
+
+if [[ "$selection" == "Main Screen" ]]; then
+    scrcpy \
+        --window-title="Android: Main Screen" \
+        -S \
+        --no-audio
+else
+    scrcpy \
+        --new-display \
+        --start-app="$package" \
+        --window-title="Android: $selection" \
+        --no-audio \
+        --flex-display \
+        -K
+fi
