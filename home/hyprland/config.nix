@@ -53,9 +53,4 @@
 
     touchdevice.output = "DP-4";
   };
-
-  windowrule = [
-    "opacity 0.90 0.90,class:^(kitty)$"
-    "blur,class:^(kitty)$"
-  ];
 }
