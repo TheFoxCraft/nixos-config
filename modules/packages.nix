@@ -60,6 +60,7 @@
         grim
         slurp
         wl-clipboard
+        cliphist
 
         pavucontrol
         playerctl
