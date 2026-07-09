@@ -13,6 +13,8 @@
       bind = import ./keybinds.nix { inherit lib; };
 
       window_rule = import ./windowRules.nix;
+
+      layer_rule = import ./layerRules.nix;
     }
     // import ./animations.nix;
   };

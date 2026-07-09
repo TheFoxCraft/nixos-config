@@ -1,0 +1,145 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  color: #d7e3ff;
+}
+
+.control-center {
+  background: rgba(15, 18, 28, 0.65);
+
+  border: 1px solid rgba(120, 170, 255, 0.2);
+  border-radius: 18px;
+}
+
+.control-center .notification-row {
+  margin: 6px 8px;
+}
+
+.control-center-list,
+.control-center-list-placeholder,
+.notification-group,
+.notification-group-header,
+.notification-group-headers,
+.blank-window {
+  background: transparent;
+}
+
+.notification-group {
+  padding-top: 10px;
+  border: 1px solid rgba(120, 170, 255, 0.1);
+  border-radius: 14px;
+}
+
+.notification,
+.notification-content,
+.notification-default-action {
+  background: rgba(35, 45, 70, 0.45);
+
+  border: 1px solid rgba(120, 170, 255, 0.1);
+  border-radius: 14px;
+
+  transition: all 180ms ease;
+}
+
+.notification:hover,
+.notification:hover .notification-default-action,
+.notification-default-action:hover {
+  background: rgba(60, 85, 140, 0.45);
+
+  border-color: rgba(140, 190, 255, 0.35);
+}
+
+.notification-content {
+  background: transparent;
+  border: none;
+  padding: 12px;
+}
+
+.summary {
+  color: #d8e5ff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.body {
+  color: #bfcde7;
+}
+
+.time {
+  color: #8ba3d9;
+  font-size: 11px;
+}
+
+.image {
+  margin-right: 10px;
+}
+
+.app-name {
+  color: #9fd4ff;
+  font-size: 11px;
+}
+
+.notification-action {
+  background: rgba(35, 45, 70, 0.45);
+
+  border-radius: 10px;
+  border: 1px solid rgba(120, 170, 255, 0.1);
+
+  margin: 4px;
+  padding: 8px;
+
+  transition: all 180ms ease;
+}
+
+.notification-action:hover {
+  background: rgba(60, 85, 140, 0.45);
+
+  border-color: rgba(140, 190, 255, 0.35);
+}
+
+.widget-title,
+.widget-dnd,
+.widget-buttons-grid,
+.widget-volume,
+.widget-mpris,
+.widget-backlight {
+  background: rgba(35, 45, 70, 0.45);
+
+  border-radius: 14px;
+  border: 1px solid rgba(120, 170, 255, 0.1);
+
+  margin: 8px;
+  padding: 10px;
+
+  transition: all 180ms ease;
+}
+
+.widget-title:hover,
+.widget-dnd:hover,
+.widget-buttons-grid:hover,
+.widget-volume:hover,
+.widget-mpris:hover,
+.widget-backlight:hover {
+  background: rgba(60, 85, 140, 0.45);
+
+  border-color: rgba(140, 190, 255, 0.35);
+}
+
+button {
+  background: rgba(35, 45, 70, 0.45);
+
+  border-radius: 10px;
+  border: 1px solid rgba(120, 170, 255, 0.1);
+
+  transition: all 180ms ease;
+}
+
+button:hover {
+  background: rgba(60, 85, 140, 0.45);
+
+  border-color: rgba(140, 190, 255, 0.35);
+}
+
+scrollbar trough {
+  background: rgba(35, 45, 70, 0.25);
+}

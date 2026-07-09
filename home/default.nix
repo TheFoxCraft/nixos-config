@@ -10,6 +10,7 @@
     ./kitty
     ./starship
     ./zsh
+    ./swaync
   ];
 
   home.stateVersion = "26.05";

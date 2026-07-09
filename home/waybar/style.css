@@ -44,6 +44,7 @@ button:hover {
 #tray,
 #power-profiles-daemon,
 #mpd,
+#custom-notification,
 #custom-power {
   background: rgba(35, 45, 70, 0.45);
 
@@ -67,6 +68,7 @@ button:hover {
 #tray:hover,
 #power-profiles-daemon:hover,
 #mpd:hover,
+#custom-notification:hover,
 #custom-power:hover {
   background: rgba(60, 85, 140, 0.45);
   border-color: rgba(140, 190, 255, 0.35);
@@ -220,6 +222,22 @@ button:hover {
   background: rgba(255, 70, 70, 0.15);
 
   border-color: rgba(255, 100, 100, 0.4);
+}
+
+#custom-notification.notification {
+  color: #ffd26a;
+}
+
+#custom-notification.dnd {
+  color: #8b98aa;
+}
+
+#custom-notification.dnd-notification {
+  color: #ffb86c;
+}
+
+#custom-notification.inhibited {
+  color: #8ba3d9;
 }
 
 tooltip {

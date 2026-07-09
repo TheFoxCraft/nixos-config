@@ -77,6 +77,8 @@
 
       # hyprland
       ++ [
+        swaynotificationcenter
+
         kitty
         waybar
         hyprpaper
