@@ -186,6 +186,5 @@ else
         --start-app="$package" \
         --window-title="Android: $selection" \
         --no-audio \
-        --flex-display \
-        -K
+        --flex-display
 fi
