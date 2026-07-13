@@ -12,7 +12,7 @@
     scale = "1";
   }
   {
-    output = "DP-4";
+    output = "DP-2";
     mode = "1920x1080@60.00Hz";
     position = "320x1440";
     scale = "1.25";
