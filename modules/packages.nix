@@ -57,6 +57,7 @@
         openssh
         fastfetch
         scrcpy
+        appimage-run
 
         grim
         slurp
@@ -68,6 +69,8 @@
 
         zip
         unzip
+
+        bitwarden-desktop
       ]
 
       # misc
